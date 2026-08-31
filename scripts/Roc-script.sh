@@ -326,8 +326,13 @@ if package_enabled easytier luci-app-easytier; then
   rm -rf \
     package/easytier \
     package/luci-app-easytier \
-    package/version.mk
-  git_sparse_clone main https://github.com/EasyTier/luci-app-easytier easytier luci-app-easytier version.mk
+    package/version.mk \
+    package/luci-app-easytier-src
+  clone_repository https://github.com/EasyTier/luci-app-easytier main package/luci-app-easytier-src
+  mv package/luci-app-easytier-src/easytier package/
+  mv package/luci-app-easytier-src/luci-app-easytier package/
+  mv package/luci-app-easytier-src/version.mk package/
+  rm -rf package/luci-app-easytier-src
 fi
 
 if package_enabled luci-app-unblockneteasemusic; then
