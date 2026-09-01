@@ -315,6 +315,9 @@ fi
 if package_enabled tailscale luci-app-tailscale-community; then
   rm -rf package/tailscale
   git_sparse_clone main https://github.com/GuNanOvO/openwrt-tailscale package/tailscale
+  # 固定 tailscale 到 v1.102.2（v1.102.3 需要 Go 1.26.6，而 OpenWrt 25.12 源里的 Go 是 1.26.5）
+  sed -i 's/^PKG_VERSION:=1\.102\.3$/PKG_VERSION:=1.102.2/' package/tailscale/Makefile
+  sed -i 's/^PKG_HASH:=0e94d96131ce7d33e8b7ce4ac6fdbec83ee5658784eed69eb7fce300729d717$/PKG_HASH:=66c447b5555aa89e0690dc21e0ec59421302ceaa982f3ccc0df686b16f5d5505/' package/tailscale/Makefile
 fi
 
 if package_enabled luci-app-tailscale-community; then
